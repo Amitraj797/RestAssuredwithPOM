@@ -29,8 +29,10 @@ public class AddPlaceWithSpecBuilder {
         types.add("shop");
         addPlace.setTypes(types);
 
-        given().log().all().spec(SpecBuild.requestSpecBuilder())
-                .body(addPlace).when().post("/maps/api/place/add/json").then().log().all().spec(SpecBuild.responseSpecBuilder())
+       RequestSpecification requestSpecification= given().log().all().spec(SpecBuild.requestSpecBuilder())
+                .body(addPlace);
+
+           ResponseSpecification responseSpecification= requestSpecification.when().post("/maps/api/place/add/json").then().log().all().spec(SpecBuild.responseSpecBuilder())
                 .body("status",equalTo("OK"));
     }
 }
